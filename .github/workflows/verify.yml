@@ -18,7 +18,7 @@ jobs:
             - name: Format
               uses: creyD/prettier_action@v3.3
               with:
-                  prettier_options: --write --config ./.prettierrc ./src/**/*.{vue,js,json,css,html,mdx}
+                  prettier_options: -w u .
                   only_changed: True
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,24 +39,27 @@ jobs:
             - name: Install dependencies
               uses: bahmutov/npm-install@v1
 
-            - name: Lint code
-              run: npm run ci:lint
+            - name: Lint scripts
+              run: npm run lint:script
 
-    test:
-        runs-on: ubuntu-latest
-        name: Test
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
-              with:
-                  ref: ${{ github.head_ref }}
+            - name: Lint styles
+              run: npm run lint:style
 
-            - uses: actions/setup-node@v2
-              with:
-                  node-version: "14"
+    # test:
+    #     runs-on: ubuntu-latest
+    #     name: Test
+    #     steps:
+    #         - name: Checkout code
+    #           uses: actions/checkout@v2
+    #           with:
+    #               ref: ${{ github.head_ref }}
 
-            - name: Install dependencies
-              uses: bahmutov/npm-install@v1
+    #         - uses: actions/setup-node@v2
+    #           with:
+    #               node-version: "14"
 
-            - name: Test code
-              run: npm run ci:test
+    #         - name: Install dependencies
+    #           uses: bahmutov/npm-install@v1
+
+    #         - name: Test code
+    #           run: npm run ci:test

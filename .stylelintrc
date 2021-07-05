@@ -1,0 +1,11 @@
+{
+  "extends": ["stylelint-config-recommended", "stylelint-config-standard"],
+  "rules": {
+    indentation: [
+      4,
+      {
+        baseIndentLevel: 0,
+      }
+    ]
+  }
+}
